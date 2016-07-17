@@ -193,6 +193,8 @@ Other Style Guides
   <a name="es6-computed-properties"></a><a name="3.4"></a>
   - [3.4](#es6-computed-properties) Use computed property names when creating objects with dynamic property names.
 
+**Ember NOTE:** This section refers to [ES Computed Properties Names](http://es6-features.org/#ComputedPropertyNames), which is a new language feature that we should be use. [Ember Computed Properties](https://guides.emberjs.com/v2.6.0/object-model/computed-properties/) are different than and both are compatible.
+
     > Why? They allow you to define all the properties of an object in one place.
 
     ```javascript
@@ -926,6 +928,8 @@ Other Style Guides
 
 ## Classes & Constructors
 
+**EMBER NOTE:** this is recommended for regular JS code, however, Ember uses it's own Object model that isn't yet compatible with ES classes. When using and creating Ember types we still need to use `.extend`, `.create` and `init` as defined on [Ember's Guide about Classess and Instances](https://guides.emberjs.com/v2.6.0/object-model/classes-and-instances/)
+
   <a name="constructors--use-class"></a><a name="9.1"></a>
   - [9.1](#constructors--use-class) Always use `class`. Avoid manipulating `prototype` directly.
 
@@ -1129,6 +1133,8 @@ Other Style Guides
 
   <a name="modules--no-export-from-import"></a><a name="10.3"></a>
   - [10.3](#modules--no-export-from-import) And do not export directly from an import.
+
+**EMBER NOTE:** this is recommended for regular JS code, Ember generators use this for addon import/export statements as one-liners. We don't need need to fight with generated code to meet this rule.
 
     > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
 
@@ -2461,6 +2467,8 @@ Other Style Guides
   <a name="naming--filename-matches-export"></a><a name="22.6"></a>
   - [22.6](#naming--filename-matches-export) A base filename should exactly match the name of its default export.
 
+**Ember NOTE:** ember's resolver follows a different convention. For all Ember App's we'll used `low-dasherized-casing` for all file-names regardless of the export type.
+
     ```javascript
     // file 1 contents
     class CheckBox {
@@ -2527,6 +2535,12 @@ Other Style Guides
 
   <a name="accessors--no-getters-setters"></a><a name="23.2"></a>
   - [23.2](#accessors--no-getters-setters) Do not use JavaScript getters/setters as they cause unexpected side effects and are harder to test, maintain, and reason about. Instead, if you do make accessor functions, use getVal() and setVal('hello').
+
+**Ember NOTE:** [Ember's binding system requires getters and setters](https://guides.emberjs.com/v2.6.0/object-model/classes-and-instances/#toc_accessing-object-properties).
+When working with any object that will be used for templates, please use `.get` and `.set`,
+for Plain Old Javascript Objects, you can use `Ember.get(object, 'propertyName')`
+and `Ember.set(object, 'propertyName', value)`. This is necessary for bindings to
+work properly, otherwise, changes to the object won't update in the view.
 
     ```javascript
     // bad
